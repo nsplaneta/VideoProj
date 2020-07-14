@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block customstylesheets %}
+{#    <link href="{{asset('assets/css/dashboard.css')}}" rel="stylesheet">#}
+{% endblock %}
+{% block title %}{{ app.user.name }} {{  app.user.lastname }} Profile{% endblock %}
+{% block menu %}{% endblock %}
+{% block main %}
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">
+            <a class="navbar-brand rated-name" href="{{ path('home') }}">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-camera-video-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.667 3h6.666C10.253 3 11 3.746 11 4.667v6.666c0 .92-.746 1.667-1.667 1.667H2.667C1.747 13 1 12.254 1 11.333V4.667C1 3.747 1.746 3 2.667 3z"/>
+                    <path d="M7.404 8.697l6.363 3.692c.54.313 1.233-.066 1.233-.697V4.308c0-.63-.693-1.01-1.233-.696L7.404 7.304a.802.802 0 0 0 0 1.393z"/>
+                </svg>
+                VideoProj
+            </a>
+            { Personal profile }
+        </h5>
+        <a class="nav-link" style="color: #2D259D" href="{{ path('home') }}"> Go to public site</a>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark">Logged as {{ app.user.name }} {{  app.user.lastname }}</a>
+        </nav>
+        <a class="btn btn-outline-violet my-2 my-sm-0" href="{{ path('logout') }}">Logout</a>
+    </div>
+
+    <div class="row">
+        <nav class="col-md-1 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_profile') }}">
+                            <span data-feather="file"></span>
+                            My profile
+                        </a>
+                    </li>
+                    {%  if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('categories') }}">
+                                <span data-feather="file"></span>
+                                Categories
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('videos') }}">
+                            <span data-feather="shopping-cart"></span>
+                            Videos
+                        </a>
+                    </li>
+                    {%  if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('upload_video') }}">
+                                <span data-feather="shopping-cart"></span>
+                                Upload video
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('users') }}">
+                                <span data-feather="users"></span>
+                                Users
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-8 px-sm-5">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{label}}" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% block mainadmin %}{% endblock %}
+        </main>
+    </div>
+{% endblock %}
+{% block footer_links %}{% endblock %}
+{% block customjavascripts %}
+    <script>
+        $('input[type="file"]').change(function (e) {
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
+        });
+    </script>
+{% endblock %}

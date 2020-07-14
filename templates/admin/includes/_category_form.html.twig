@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+{% if edit_page is empty %}
+<div class="row p-3">
+    <div class="col-md-2">
+        <i class="fa fa-plus-circle" aria-hidden="true" style="color: #2D259D; font-size: 24px"></i>
+        <b>Add category</b>
+    </div>
+    <div class="col-md-4">
+    {% set category = { 'name':''} %}
+    {% set submitButton = 'Add' %}
+    {% else %}
+        {% set submitButton = 'Update' %}
+    {% endif %}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control ' ~ invalid, 'placeholder':'Category name', 'value':category.name}}) }}
+
+    </div>
+    <div class="col-md-4">
+        <select name="category[parent]" class="custom-select">
+            {{ render(controller('App\\Controller\\Admin\\Superadmin\\CategoryController::getAllCategories')) }}
+        </select>
+
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-outline-violet my-2 my-sm-0" type="submit">Update</button>
+    </div>
+</div>
+{{ form_end(form) }}

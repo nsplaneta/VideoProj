@@ -1,0 +1,6 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block mainadmin %}
+<h2>Editing category</h2>
+    {% include 'admin/includes/_category_form.html.twig' with {'edit_page':'true'} %}
+{% endblock %}
