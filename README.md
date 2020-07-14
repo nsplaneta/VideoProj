@@ -9,7 +9,7 @@ PHP v7.2.5 +
 Composer v1.10 +
 ```
 
-## Getting Started
+## Getting Started on Localhost
 
 #### Download the source
 
