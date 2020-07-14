@@ -13,7 +13,9 @@ Composer v1.10 +
 
 #### Download the source
 
+```
 $ git clone https://github.com/nsplaneta/VideoProj.git
+```
 
 #### Move to the new directory
 
