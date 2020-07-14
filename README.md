@@ -4,8 +4,10 @@ Video-sharing platform, movie trailers, music videos, amateur vlogs and videos o
 
 ### Requirement
 
+```
 PHP v7.2.5 +
 Composer v1.10 +
+```
 
 ## Getting Started
 
