@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{#{% block customstylesheets %}#}
+{#    <link rel="stylesheet" href="{{asset('assets/css/login.css')}}">#}
+{#{% endblock %}#}
+{#{% block menu %}{% endblock %}#}
+{% block main %}
+<div class="container mt-lg-5">
+
+    <div class="row">
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+        <div class="col-md-6 mx-auto p-5 shadow">
+
+            <form method="POST" action="{{ path('login') }}" class="form-signin">
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" name="email" id="inputEmail" class="form-control mb-3" placeholder="Email address" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required>
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-md btn-outline-violet btn-block" type="submit">Sign in</button>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+{% block footer_links %}{% endblock %}
+

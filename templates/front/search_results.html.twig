@@ -1,0 +1,65 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block main %}#}
+{#    <section class="jumbotron text-center">#}
+{#        <div class="container">#}
+{#            {% if videos %}#}
+{#                <h1 class="jumbotron-heading">Search results</h1>#}
+{#                {{ include('front/includes/_sort.html.twig',{'query':query}) }}#}
+{#            {% else %}#}
+{#                <h1 class="jumbotron-heading">No results were found</h1>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    </section>#}
+{#    {% if videos %}#}
+{#        {{ include('front/includes/_videos_list.html.twig', {'videos' : videos}) }}#}
+{#        {{ knp_pagination_render(videos) }}#}
+{#    {% endif %}#}
+
+
+{#{% endblock %}#}
+
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('assets/css/video_list.css')}}">
+{% endblock %}
+{% block main %}
+    <div class="container-fluid" style="padding-top: 50px">
+        <div class="row">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+
+                    <div class="text-left float-left">
+                        {% if videos %}
+                            <h1 class="jumbotron-heading">Search results</h1>
+                        {% else %}
+                            <h1 class="jumbotron-heading">No results were found</h1>
+                        {% endif %}
+                    </div>
+
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        {% if videos %}
+                        {{ include('front/includes/_sort.html.twig',{'query':query}) }}
+                        {% endif %}
+                    </div>
+                </div>
+                    {% if videos %}
+                {{ knp_pagination_render(videos) }}
+                <div class="row" style="padding-bottom: 150px">
+                    {{ include('front/includes/_videos_list.html.twig', {'videos': videos}) }}
+                </div>
+                        {% else %}
+                            <div class="col-md-12 p-5">
+
+                                <i class="fa fa-frown-o" style="font-size: 400px; color: #D01C1B" aria-hidden="true"></i>
+
+                            </div>
+
+                    {% endif %}
+            </main>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+

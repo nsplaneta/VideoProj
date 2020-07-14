@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+    <div class="container shadow">
+
+        <!-- Heading Row -->
+        <div class="row my-5">
+            <div class="col-lg-10 pt-5">
+                <h1>Top rated video
+                    <i class="fa active fa-thumbs-up" style="font-size: 36px"></i>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+            <video width="550" controls style="border: 1px solid #666666">
+                    <source src="{% if video_no_members is not null %}{{ video_no_members }}{% else %}{{ rated[0].path }}{% endif %}" type="video/mp4">
+                </video>
+            </div>
+            <!-- /.col-lg-8 -->
+            <div class="col-lg-4 rounded mx-sm-2" style="background-color: #F5F5F5">
+                <h1 class="rated-name">{{ rated[0].title }} </h1>
+                <p><b>Uploaded by: </b> {{ rated[0].name }} {{ rated[0].last_name  }}</p>
+                <p><b>Rates: </b> {{ rated[0].rates }}
+                    <i class="fa active fa-thumbs-up"></i>
+
+                </p>
+                <p><b>Duration: </b> {{ rated[0].duration }} minutes</p>
+                <a class="btn btn-outline-violet my-2 my-sm-0" href="{{path('video_details', {'video':rated[0].id})}}">Go to details!</a>
+            </div>
+            <!-- /.col-md-4 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Call to Action Well -->
+        <div class="card text-white bg-secondary my-5 py-4 text-center ">
+            <div class="col-md-6 mx-auto">
+            <div class="card-body">
+                <p class="text-white m-0">Share with your friends:</p>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend" >
+                        <span class="input-group-text" id="basic-addon3">URL</span>
+                    </div>
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="{{ url('home') }}video-details/{{ rated[0].id }}" />
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Content Row -->
+        <div class="row">
+            {% set places = { 0:'2nd', 1:'3rd',2:'4th' } %}
+            {% for place in places %}
+                <div class="card-deck" style="padding: 10px">
+
+                    <div class="card mb-3">
+
+                        <div class="card-header">
+                            <i class="fa active fa-thumbs-up" style="font-size: 20px"></i>
+                            {{ place }}
+                            <h4 class="card-title rated-name">
+                                {{rated[(loop.index0+1)].title}}
+                            </h4>
+                        </div>
+
+                        <div class="card-body">
+                            {% if not app.user or video_no_members is not null %}
+
+                                <p class="card-text text-danger">Only for <b>Subscribers</b>! <a href="{{path('pricing')}}">Sign up</a> <u>one month</u> trial available.</p>
+
+                            {% endif  %}
+                        </div>
+
+                        <video  width="100%" controls>
+                            <source src="{% if video_no_members is not null %}{{ video_no_members }}{% else %}{{ rated[(loop.index0+1)].path }}{% endif %}" type="video/mp4">
+                        </video>
+
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">
+
+                                <b> Rates: </b>{{rated[(loop.index0+1)].rates}}
+
+                            </li>
+
+                            <li class="list-group-item"><b>Duration: </b> {{rated[(loop.index0+1)].duration}} minutes</li>
+
+                        </ul>
+
+                        <div class="card-footer">
+                            <a class="btn btn-outline-violet my-2 my-sm-0" href="{{path('video_details', {'video':rated[loop.index0+1].id})}}">Go to details!</a>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- /.row -->
+
+    </div>
+
+{% endblock %}

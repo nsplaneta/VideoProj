@@ -1,0 +1,11 @@
+<form id="form-sorting" method="GET">
+    {% if query is defined %}
+        <input name="query" type="hidden" value="{{ query }}">
+    {% endif %}
+    <select name="sortby" class="custom-select mr-sm-2" id="inlineFormCustomSelect" onchange='this.form.submit();'>
+        <option selected>Sort...</option>
+        <option value="rating">Highest rated</option>
+        <option value="asc">Title A-Z</option>
+        <option value="desc">Title Z-A</option>
+    </select>
+</form>
