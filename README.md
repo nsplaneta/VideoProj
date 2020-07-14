@@ -57,8 +57,16 @@ $ php bin/console doctrine:migrations:migrate -n -q
 $ php bin/console doctrine:fixtures:load -n -q
 ```
 
-#### Enjoy the platform.
+#### See the results.
 
 ```
 $ symfony serve
 ```
+
+#### Or run
+
+```
+$ php -S 127.0.0.1:8000 -t public
+```
+
+#### Enjoy the platform.
