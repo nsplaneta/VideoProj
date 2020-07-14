@@ -1,8 +1,0 @@
-{% for category in categories %}
-    <li class="nav-item{{ pathId == category.id ? ' active' }}">
-        <a class="nav-link" href="{{ path('video_list',
-            {'category':category.name|lower|slugify, 'id':category.id})}}">
-            {{ category.name }}
-        </a>
-    </li>
-{% endfor %}

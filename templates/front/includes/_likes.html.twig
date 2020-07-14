@@ -1,5 +1,0 @@
-{% if video in app.user.getRatedVideos %}
-    You rated!     <a href="{{path('undo_rate_video',{'video':video.id})}}" class="fa active fa-thumbs-up"></a>
-{% else %}
-    Rate!    <a href="{{path('rate_video',{'video':video.id})}}" class="fa unactive fa-thumbs-up"></a>
-{% endif %}
